@@ -17,8 +17,11 @@ app.get('/hello', (req, res) => {
     res.send('Hello World!')
 });
 
-require("node:dns/promises").setServers(["1.1.1.1", "8.8.8.8"]);
+const jobApplicationRoutes = require('./routes/jobApplicationsRoutes');
+app.use('/applications', jobApplicationRoutes);
 
+
+require("node:dns/promises").setServers(["1.1.1.1", "8.8.8.8"]);
 mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log('Connected to MongoDB'))
 .catch((connection_error) => console.error('Error connecting to MongoDB:', connection_error));
