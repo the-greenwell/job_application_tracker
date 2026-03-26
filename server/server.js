@@ -13,15 +13,18 @@ app.use(cors());
 app.use(json());
 app.use(urlencoded({ extended: true }));
 
-app.get('/hello', (req, res) => {
+app.get('/hello-test', (req, res) => {
     res.send('Hello World!')
 });
 
+const userAuthRoutes = require('./routes/userAuthRoutes');
 const jobApplicationRoutes = require('./routes/jobApplicationsRoutes');
+
+app.use('/user', userAuthRoutes);
 app.use('/applications', jobApplicationRoutes);
 
-
 require("node:dns/promises").setServers(["1.1.1.1", "8.8.8.8"]);
+
 mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log('Connected to MongoDB'))
 .catch((connection_error) => console.error('Error connecting to MongoDB:', connection_error));

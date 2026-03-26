@@ -1,8 +1,10 @@
 const { Router } = require('express');
+const { authorizeAccessToken } = require('../middleware/authMiddleware');
 const { getJobApplications, createJobApplication, updateJobApplication, deleteJobApplication } = require('../controllers/jobApplicationController');
 
 const router = Router();
 
+router.use(authorizeAccessToken);
 router.get('/', getJobApplications);
 router.post('/', createJobApplication);
 router.put('/:id', updateJobApplication);

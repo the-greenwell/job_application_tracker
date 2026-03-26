@@ -12,11 +12,9 @@ const JobApplication = new Schema({
     },
     source: {
         type: String,
-        required: false,
     },
     job_url: {
         type: String,
-        required: false,
     },
     status: {
         type: String,
@@ -25,9 +23,14 @@ const JobApplication = new Schema({
     },
     archived: {
         type: Boolean,
-        required: true,
         default: false,
+        required: true,
     },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    }
     }, {timestamps: true});
 
     module.exports = mongoose.model('JobApplication', JobApplication);
