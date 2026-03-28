@@ -14,7 +14,7 @@ const createJobApplication = async (payload) => {
     return response.data;
 };
 
-const updatJobApplication = async (job_id, payload) => {
+const updateJobApplication = async (job_id, payload) => {
     const {title, company, source, job_url} = payload;
     const response = await api.put(`${JOBAPPS}/${job_id}`, {title, company, source, job_url});
     return response.data;
@@ -28,6 +28,6 @@ const deleteJobApplication = async (job_id) => {
 export {
     getJobApplications,
     createJobApplication,
-    updatJobApplication,
+    updateJobApplication,
     deleteJobApplication
 };
