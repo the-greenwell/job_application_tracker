@@ -6,7 +6,7 @@ const router = Router();
 
 router.use(authorizeAccessToken);
 router.get('/', getJobApplications);
-router.post('/', createJobApplication);
+router.post('/new', createJobApplication);
 router.put('/:id', updateJobApplication);
 router.delete('/:id', deleteJobApplication);
 

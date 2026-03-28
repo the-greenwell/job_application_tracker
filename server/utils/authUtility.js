@@ -2,9 +2,9 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 const generateAccessToken = (user) => {
-    const { _id, first_name, last_name } = user;
+    const { _id } = user;
     return jwt.sign(
-        { id: _id, first_name: first_name, last_name: last_name },
+        { id: _id },
         process.env.JWT_ACCESS_TOKEN_SECRET,
         { expiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRES || '15m' }
     );
