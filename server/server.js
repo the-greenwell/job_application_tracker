@@ -13,15 +13,15 @@ app.use(cors());
 app.use(json());
 app.use(urlencoded({ extended: true }));
 
-app.get('/hello-test', (req, res) => {
-    res.send('Hello World!')
+app.get('/ping', (req, res) => {
+    res.status(200).send('Server is live :)')
 });
 
 const userAuthRoutes = require('./routes/userAuthRoutes');
 const jobApplicationRoutes = require('./routes/jobApplicationsRoutes');
 
-app.use('/user', userAuthRoutes);
-app.use('/applications', jobApplicationRoutes);
+app.use('/auth', userAuthRoutes);
+app.use('/job-apps', jobApplicationRoutes);
 
 require("node:dns/promises").setServers(["1.1.1.1", "8.8.8.8"]);
 

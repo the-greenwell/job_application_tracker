@@ -10,12 +10,12 @@ const register = async (req, res) => {
         const existingUser = await User.findOne({ email });
         if (existingUser) return res.status(409).json({ error: 'User exists'})
             
-            const hashedPassword = await argon2.hash(password);
-            const user = await User.create({first_name, last_name, email, password: hashedPassword});
-            
-            const accessToken = await issueTokens(res, user);
-            
-            res.status(200).json({ message: 'Registration Successful', accessToken });
+        const hashedPassword = await argon2.hash(password);
+        const user = await User.create({first_name, last_name, email, password: hashedPassword});
+        
+        const accessToken = await issueTokens(res, user);
+        
+        res.status(200).json({ message: 'Registration Successful', accessToken, user });
     } catch (error) {
         res.status(500).json({ error: 'Register User', message: error.message });
     }
@@ -32,7 +32,7 @@ const login = async (req, res) => {
         if(!passwordsMatch) return res.status(401).json({ error: 'Invalid Credentials' });
         
         const accessToken = await issueTokens(res, user);
-        res.status(200).json({ message: 'Login Successful', accessToken });
+        res.status(200).json({ message: 'Login Successful', accessToken, user });
     } catch (error) {
         res.status(500).json({ error: 'Login', message: error.message });
     }
