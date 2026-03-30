@@ -67,7 +67,8 @@ const newRefreshToken = async (req, res) => {
         if (!user) return res.status(403).json({ error: 'Refresh Token'});
         
         const accessToken = await issueTokens(res, user);
-        res.status(200).json({ message: 'Token refreshed successfully', accessToken });
+        const { _id, email, first_name, last_name } = user;
+        res.status(200).json({ message: 'Token refreshed successfully', accessToken , user: {_id, email, first_name, last_name}});
     } catch (error) {
         if (error.name === 'TokenExpiredError') return res.status(401).json({ error: 'Refresh Token', message: 'Token has expired' });
 
