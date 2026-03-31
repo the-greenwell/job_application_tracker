@@ -25,15 +25,23 @@
     }
     .nav-right {
         .navbar-item {
+            
             &:hover {
                 background-color: lightgrey;
+                border-bottom: 4px solid darkgrey;
             }
-            &:active {
+
+            .active {
                 background-color: lightgrey;
+                border-bottom: 4px solid darkgrey;
             }
         }
     }
 
+    .active {
+        background-color: lightgrey;
+        border-bottom: 4px solid darkgrey;
+    }
 
     .navbar-item {
         text-decoration: none;

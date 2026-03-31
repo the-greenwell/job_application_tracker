@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { login, logout, register, refreshAccessToken } from '../services/authService';
 import { setAccessToken, clearAccessToken, registerExpiredSessionHandler } from "../services/api";
 
@@ -16,7 +16,7 @@ const AuthProvider = ({ children }) => {
             clearAccessToken();
             navigate('/login');
         });
-// eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
     useEffect (() => {
@@ -44,7 +44,7 @@ const AuthProvider = ({ children }) => {
     const handleLogout = async () => {
         try {
             await logout();
-        } finally {
+        } finally { 
             clearAccessToken();
             setUser(null);
             navigate('/login');
@@ -58,7 +58,7 @@ const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{
+        <AuthContext value={{
             user,
             isLoading,
             isAuthenticated: !!user,
@@ -67,17 +67,12 @@ const AuthProvider = ({ children }) => {
             register: handleRegister,
         }}>
             { children }
-        </AuthContext.Provider>
+        </AuthContext>
     );
 };
 
-const useAuth = () => {
-    const context = useContext(AuthContext);
-    if (!context) throw new Error('useAuth must be used in an AuthProvider');
-    return context;
-};
 
 export {
-    AuthProvider,
-    useAuth,
+    AuthContext,
+    AuthProvider
 }
